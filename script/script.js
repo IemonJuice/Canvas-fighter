@@ -317,17 +317,17 @@ window.addEventListener('keydown',(event)=>{
 })
 window.addEventListener('keyup',(event)=>{
 
-    switch (event.key){
+    switch (event.code){
 
-        case 'd':{
+        case 'KeyD':{
             key.d.pressed = false;
             break;
         }
-        case 'a':{
+        case 'KeyA':{
             key.a.pressed = false;
             break;
         }
-        case 'w':{
+        case 'KeyW':{
             key.w.pressed = false;
             break;
         }
