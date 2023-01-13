@@ -11,6 +11,7 @@ const background = new gameSprite({
     },
     imageSrc : './img/BACKGROUND.png'
 })
+
 const bannerCoke = new gameSprite({
     position: {
         x : 685,
@@ -21,6 +22,7 @@ const bannerCoke = new gameSprite({
     imageSrc : './img/spritesheet.png',
     frameMax: 3
 })
+
 const banerNeon = new gameSprite({
     position: {
         x : 695,
@@ -36,10 +38,6 @@ CANVAS.height = 100;
 
 C.fillRect(0,0,CANVAS.width,CANVAS.height = 1080);
 
-
-
-
-
 const Player = new Fighter({
     position:{
         x: 0,
@@ -49,6 +47,7 @@ const Player = new Fighter({
         x: 0,
         y: 0
     },
+
     color: 'red',
 
     imageSrc: './img/hero2/Idle.png',
@@ -97,6 +96,7 @@ const Player = new Fighter({
         height: 50
     }
 });
+
 const Enemy = new Fighter({
     position:{
         x: 1000,
@@ -206,15 +206,16 @@ function animate(){
     }
     else if(key.w.pressed && (Player.position.y >=750)&&(Player.position.y <=751))
         Player.velocity.y = -20;
-    else{
+
+    else
         Player.switchSprite('idle');
-    }
-    if(Player.velocity.y<0) {
+
+    if(Player.velocity.y<0)
         Player.switchSprite('jump');
-    }
-    else if(Player.velocity.y>0){
+
+    else if(Player.velocity.y>0)
         Player.switchSprite('fall');
-    }
+
 //Enemy movement
     if(key.ArrowLeft.pressed && Enemy.lastKey ==='ArrowLeft') {
         Enemy.velocity.x = -4;
@@ -224,15 +225,17 @@ function animate(){
         Enemy.velocity.x = 4;
         Enemy.switchSprite('run')
     }
+
     else if(key.ArrowUp.pressed && (Enemy.position.y >=750)&&(Enemy.position.y <=751))
         Enemy.velocity.y = -20;
-    else{
-        Enemy.switchSprite('idle');
-    }
 
-    if(key.ArrowUp.pressed && (Enemy.position.y >=750)&&(Enemy.position.y <=751)) {
+    else
+        Enemy.switchSprite('idle');
+
+
+    if(key.ArrowUp.pressed && (Enemy.position.y >=750)&&(Enemy.position.y <=751))
         Enemy.switchSprite('jump');
-    }
+
 
     if(Enemy.velocity.y<0)
         Enemy.switchSprite('jump');
@@ -246,19 +249,21 @@ function animate(){
         Player.isAttacking = false;
         Enemy.takeHit();
         document.getElementById('EnemyHealthbar').style.width = Enemy.health+ '%';
-
         }
+
     if(RectangularCollision({rectangle1:Enemy,rectangle2:Player}) && Enemy.isAttacking){
         Enemy.isAttacking = false;
         Player.takeHit();
-        Player.health-=20;
         document.getElementById('PlayerHealthbar').style.width = Player.health+ '%';
     }
 }
 animate();
+
 window.addEventListener('keydown',(event)=>{
     if(!Player.dead) {
+
         switch (event.key) {
+
             case 'd': {
                 key.d.pressed = true;
                 Player.lastKey = 'd'
@@ -281,7 +286,9 @@ window.addEventListener('keydown',(event)=>{
         }
     }
     if(!Enemy.dead) {
+
         switch (event.key) {
+
             case 'ArrowRight': {
                 key.ArrowRight.pressed = true;
                 Enemy.lastKey = 'ArrowRight'
@@ -305,7 +312,9 @@ window.addEventListener('keydown',(event)=>{
     }
 })
 window.addEventListener('keyup',(event)=>{
+
     switch (event.key){
+
         case 'd':{
             key.d.pressed = false;
             break;
@@ -336,28 +345,31 @@ window.addEventListener('keyup',(event)=>{
 let timer = 61;
 function choosingWinner({Player,Enemy}){
 
-    if(Player.health===Enemy.health&&timer === 0)
-        document.getElementById('score').innerText = 'tie';
+    if(Player.health===Enemy.health&&timer === 0) {
+        document.getElementById('score').style.display = 'flex';
+        document.getElementById('score').innerText = 'TIE';
+    }
+
 
     else if(Player.health<=0 && Enemy.health>0) {
         document.getElementsByClassName("Timer")[0].innerText = 0;
         document.getElementById('score').innerText = 'Player 2 winner';
+        document.getElementById('score').style.display = 'flex';
     }
     else if(Player.health>0 && Enemy.health<=0) {
         document.getElementById('score').innerText = 'Player 1 winner';
+        document.getElementById('score').style.display = 'flex';
         document.getElementsByClassName("Timer")[0].innerText = 0;
     }
 }
 function timeCounting(){
 
     if(timer > 0){
-
         timer--;
         setTimeout(timeCounting,1000);
         document.getElementsByClassName("Timer")[0].innerText= timer;
 
     }
     choosingWinner({Player, Enemy});
-
 }
 timeCounting();

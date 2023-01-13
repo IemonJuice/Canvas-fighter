@@ -25,6 +25,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     line-height: 1;
+    background-color:midnightblue;
 }
 ol, ul {
     list-style: none;
@@ -63,46 +64,69 @@ canvas{
     justify-content: space-around;
 }
 .Timer{
+    letter-spacing: 20px;
+    color: deepskyblue;
+    text-shadow: 2px 2px 4px deepskyblue;
     display: flex;
     align-items: center;
+    padding-top: 23px;
     justify-content: center;
+    background-color: rgba(0,0,0,0.3);
     width: 20%;
     height: 100px;
-    background-color: red;
+    font-size: 100px;
+    font-weight: bold;
+    font-family: Uroob;
+    border: deeppink solid 5px;
+    box-shadow: 5px 5px 10px deeppink;
 }
 .EnemyHealth{
     padding: 2px;
     position: relative;
     width: 20%;
     height: 40px;
-    background-color: orange;
+    background-color: deeppink;
+    box-shadow: 2px 2px 5px deeppink;
 }
 .player__health{
     padding: 2px;
     position: relative;
     width: 20%;
     height: 40px;
-    background-color: orange;
+    background-color: deeppink;
+    box-shadow: 2px 2px 5px deeppink;
 
 }
 #EnemyHealthbar{
-    transition-duration: 1s;
+    transition-duration: 0.5s;
 }
 #PlayerHealthbar{
-    transition-duration: 1s;
+    transition-duration: 0.5s;
 }
 .player__health{
     display: flex;
     justify-content: flex-end;
 }
 #score{
+    color: midnightblue;
+    width: 1000px;
+    height: 200px;
+    text-shadow: 2px 2px 5px deepskyblue;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
+    margin: 0 auto;
     bottom: 0;
     display: flex;
     justify-content: center;
+    margin-top: 200px;
+    padding-top: 15px;
+    box-shadow: midnightblue 10px 10px 2px;
     align-items: center;
-    color: white;
+    background-color: deeppink;
+    font-weight: bold;
+    letter-spacing: 30px;
+    font-family: Uroob;
+    font-size: 100px;
 }

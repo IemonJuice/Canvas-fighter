@@ -1,5 +1,11 @@
 class gameSprite {
-    constructor({position, imageSrc,scale =1,frameMax= 1,offset = {x:0,y:0} }) {
+    constructor({
+        position,
+        imageSrc,
+        scale =1,
+        frameMax= 1,
+        offset = {x:0,y:0} })
+    {
         this.position = position;
         this.height = 150;
         this.width = 50;
@@ -9,7 +15,7 @@ class gameSprite {
         this.frameMax = frameMax;
         this.currentFrame = 0;
         this.framesElapsed = 0;
-        this.framesHold =30;
+        this.framesHold = 10;
         this.offset = offset;
     };
 
@@ -19,22 +25,27 @@ class gameSprite {
             this.image,
             this.currentFrame * ( this.image.width/this.frameMax ),
             0,
+
             this.image.width/this.frameMax,
             this.image.height,
+
             this.position.x-this.offset.x,
             this.position.y-this.offset.y,
+
             (this.image.width/this.frameMax)*this.scale,
             this.image.height*this.scale
         )
     }
     animateFrame(){
+
         this.framesElapsed++;
+
         if(this.framesElapsed%this.framesHold===0) {
-            if (this.currentFrame < this.frameMax-1) {
+            if (this.currentFrame < this.frameMax-1)
                 this.currentFrame++;
-            } else {
+            else
                 this.currentFrame = 0;
-            }
+
         }
     }
     Update() {
@@ -45,7 +56,16 @@ class gameSprite {
 }
 
 class Fighter extends gameSprite{
-    constructor({position, velocity,color, imageSrc,scale =1,frameMax= 1, offset = {x:0,y:0},sprites }) {
+    constructor({
+             position,
+             velocity,
+             color,
+             imageSrc,
+             scale =1,
+             frameMax= 1,
+             offset = {x:0,y:0},
+             sprites })
+    {
         super({
             imageSrc,
             scale,
@@ -57,6 +77,7 @@ class Fighter extends gameSprite{
         this.velocity = velocity;
         this.height = 150;
         this.lastKey;
+
         this.attackBox = {
             position: {
                 x: this.position.x,
@@ -66,15 +87,19 @@ class Fighter extends gameSprite{
             width: 100,
             height: 50,
         };
+
         this.width = 50;
         this.color = color;
         this.isAttacking;
         this.health =100;
+
         this.currentFrame = 0;
         this.framesElapsed = 0;
         this.framesHold =10;
         this.sprites = sprites;
+
         this.dead = false;
+
         for(const sprite in this.sprites){
             sprites[sprite].image = new Image();
             sprites[sprite].image.src = sprites[sprite].imageSrc;
@@ -88,8 +113,10 @@ class Fighter extends gameSprite{
 
         this.attackBox.position.x = this.position.x-this.attackBox.offset.x;
         this.attackBox.position.y = this.position.y;
+
         this.position.y +=this.velocity.y;
         this.position.x +=this.velocity.x;
+
         if(this.position.y+this.height+this.velocity.y >=CANVAS.height-180)
             this.velocity.y = 0;
         else
@@ -98,13 +125,14 @@ class Fighter extends gameSprite{
     attack(){
         this.switchSprite('attack1')
         this.isAttacking = true;
+
         setTimeout(()=>{
             this.isAttacking = false;
         },100)
     }
     takeHit(){
-
         this.health-=20;
+
         if(this.health<=0)
             this.switchSprite('death');
         else
@@ -117,9 +145,15 @@ class Fighter extends gameSprite{
             return
         }
 
-        if (this.image ===this.sprites.attack.image && this.currentFrame < this.sprites.attack.frameMax -1 ) return
+        if (
+            this.image ===this.sprites.attack.image &&
+            this.currentFrame < this.sprites.attack.frameMax -1
+           ) return
 
-        if(this.image===this.sprites.takeHit.image && this.currentFrame <this.sprites.takeHit.frameMax-1) return
+        if(
+            this.image===this.sprites.takeHit.image &&
+            this.currentFrame <this.sprites.takeHit.frameMax-1
+        ) return
 
         switch (sprite){
             case 'idle': {
