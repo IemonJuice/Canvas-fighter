@@ -262,24 +262,28 @@ animate();
 window.addEventListener('keydown',(event)=>{
     if(!Player.dead) {
 
-        switch (event.key) {
+        switch (event.code) {
 
-            case 'd': {
+            case 'KeyD': {
                 key.d.pressed = true;
                 Player.lastKey = 'd'
                 break;
+
             }
-            case 'a': {
+
+            case 'KeyA': {
                 key.a.pressed = true;
                 Player.lastKey = 'a'
                 break;
             }
-            case 'w': {
+
+            case 'KeyW': {
                 Player.lastKey = 'w';
                 key.w.pressed = true;
                 break;
             }
-            case ' ': {
+
+            case 'Space': {
                 Player.attack();
                 break;
             }
